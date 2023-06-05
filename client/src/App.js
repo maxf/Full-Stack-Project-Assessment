@@ -33,16 +33,24 @@ const Video = ({ id, title, embedUrl, upVoteFn, downVoteFn, rating }) => {
 
 
 function AddVideo({addFn}) {
+  const [ message, setMessage ] = useState("Enter the title and URL of a video");
   const add = function() {
-    addFn(
-      document.getElementById("url").value,
-      document.getElementById("title").value
-    );
+    const url = document.getElementById("url").value;
+    const title = document.getElementById("title").value;
+    if (url.length===0) {
+      setMessage("Missing URL")
+    } else if (title.length===0) {
+      setMessage("Missing title")
+    } else {
+      addFn(url, title);
+    }
   };
   return (
     <div>
-      <input id="title" name="title" value="blah"/>
-      <input id="url" name="url" value="https://www.youtube.com/embed/dQw4w9WgXcQ"/>
+      <h2>Add a video</h2>
+      <p id="add-video-message">{message}</p>
+      <p>Title: <input id="title"/></p>
+      <p>URL: <input id="url"/></p>
       <button onClick={add}>Add</button>
    </div>
   );
