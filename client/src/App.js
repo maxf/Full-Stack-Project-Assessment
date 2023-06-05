@@ -49,7 +49,7 @@ function AddVideo({addFn}) {
 }
 
 function App() {
-  const [ videos, setVideos ] = useState(videoData);
+  const [ videos, setVideos ] = useState(videoData.sort((vid1, vid2) => vid2.rating - vid1.rating));
   const changeVote = function(id, increment) {
     return function() {
       setVideos(videos => videos.map(video => {
